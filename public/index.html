@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Лабораторна робота №4 — Робота з даними користувача</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Лабораторна робота №4</h1>
+    <p class="subtitle">Збір даних із форм, локальне сховище, сесії та безпечна обробка</p>
+
+    <!-- Панель стану сховищ браузера -->
+    <div class="storage-panel">
+      <div><strong>Сесія (sessionStorage):</strong> <span id="sessionInfo">Не активна</span></div>
+      <div><strong>Збережений профіль (localStorage):</strong> <span id="localInfo">Відсутній</span></div>
+      <button type="button" id="clearStorageBtn" class="btn-secondary">Очистити сховища</button>
+    </div>
+
+    <!-- Форма збору даних -->
+    <form id="userForm" novalidate>
+      <div class="form-group">
+        <label for="username">Ім’я користувача *</label>
+        <input type="text" id="username" name="username" placeholder="Введіть ім’я (мін. 3 символи)" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Електронна пошта *</label>
+        <input type="email" id="email" name="email" placeholder="example@domain.com" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Пароль *</label>
+        <input type="password" id="password" name="password" placeholder="Мінімум 8 символів" required />
+      </div>
+
+      <div class="form-group">
+        <label for="age">Вік *</label>
+        <input type="number" id="age" name="age" placeholder="Від 14 до 120" required />
+      </div>
+
+      <div class="form-group">
+        <label for="comment">Коментар (перевірка санітизації XSS)</label>
+        <textarea id="comment" name="comment" rows="2" placeholder="Наприклад: <script>alert(1)</script>"></textarea>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="rememberMe" checked />
+        <label for="rememberMe">Запам’ятати дані у localStorage</label>
+      </div>
+
+      <button type="submit" class="btn-primary">Надіслати на сервер</button>
+    </form>
+
+    <!-- Блок результату відповіді сервера -->
+    <div id="responseBox" class="response-box hidden"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
